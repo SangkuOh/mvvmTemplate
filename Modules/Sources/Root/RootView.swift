@@ -19,7 +19,7 @@ public struct RootView: View {
   }
 
   public var body: some View {
-    Text(viewModel.data)
+    Text(viewModel.state.data)
       .task {
         await viewModel.loadExample()
       }

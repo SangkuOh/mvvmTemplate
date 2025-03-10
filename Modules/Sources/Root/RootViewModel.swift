@@ -8,12 +8,17 @@
 import Foundation
 import Service
 
+struct RootState {
+  var data: String = ""
+}
+
 @Observable
 @MainActor
 public final class RootViewModel {
+  var state: RootState = .init()
+
   var exampleService: ExampleService
 
-  var data: String = ""
 
   public init(exampleService: ExampleService = .init()) {
     self.exampleService = exampleService
@@ -22,7 +27,7 @@ public final class RootViewModel {
   func loadExample() async {
     do {
       let result = try await exampleService.fetch()
-      self.data = result
+      state.data = result
     } catch {
       print(error.localizedDescription)
     }
