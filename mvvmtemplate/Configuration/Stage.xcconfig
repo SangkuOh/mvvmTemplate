@@ -1,0 +1,3 @@
+#include "Common.xcconfig"
+
+APP_BUNDLE_IDENTIFIER = com.mvvm.stage
