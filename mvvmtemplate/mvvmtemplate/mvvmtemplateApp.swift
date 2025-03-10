@@ -10,9 +10,11 @@ import SwiftUI
 
 @main
 struct mvvmtemplateApp: App {
+  @Environment(\.exampleService) var exampleService
+
   var body: some Scene {
     WindowGroup {
-      RootView()
+      RootView(viewModel: .init(exampleService: exampleService))
     }
   }
 }

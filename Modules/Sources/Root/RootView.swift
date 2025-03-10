@@ -13,7 +13,7 @@ public struct RootView: View {
   @State var viewModel: RootViewModel
 
   public init(
-    viewModel: RootViewModel = .init()
+    viewModel: RootViewModel
   ) {
     _viewModel = .init(initialValue: viewModel)
   }
