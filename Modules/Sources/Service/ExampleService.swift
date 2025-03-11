@@ -9,16 +9,16 @@ import SwiftUI
 
 public struct ExampleService: Sendable {
   let repository: ExampleRepository
-
+  
   public init(
     repository: ExampleRepository = ExampleRepositoryLive()
   ) {
     self.repository = repository
   }
-
-
+  
+  
   public func fetch() async throws -> String {
-    await repository.fetchData()
+    try await repository.fetchData()
   }
 }
 

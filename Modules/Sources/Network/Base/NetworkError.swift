@@ -8,7 +8,7 @@ import Foundation
 
 import Foundation
 
-enum NetworkError: Error, LocalizedError {
+public enum NetworkError: Error, LocalizedError {
   case invalidURL
   case invalidResponse
   case httpError(statusCode: Int, data: Data)
@@ -16,7 +16,7 @@ enum NetworkError: Error, LocalizedError {
   case tokenExpired
   case underlying(Error)
 
-  var errorDescription: String? {
+  public var errorDescription: String? {
     switch self {
       case .invalidURL:
         return "유효하지 않은 URL입니다."

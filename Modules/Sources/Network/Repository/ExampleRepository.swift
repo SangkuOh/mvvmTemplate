@@ -8,27 +8,27 @@
 import Foundation
 
 public protocol ExampleRepository: Sendable {
-  func fetchData() async -> String
+  func fetchData() async throws -> String
 }
 
 public struct ExampleRepositoryLive: ExampleRepository {
   public init() {}
-
-  public func fetchData() async -> String {
+  
+  public func fetchData() async throws -> String {
     "Hello, World!"
   }
 }
 
 public struct ExampleRepositoryMock: ExampleRepository {
-  private let fetchDataHandler: @Sendable () async -> String
-
+  private let fetchDataHandler: @Sendable () async throws -> String
+  
   public init(
-    fetchDataHandler: @escaping @Sendable () async -> String = { "Mock Data" }
+    fetchDataHandler: @escaping @Sendable () async throws -> String = { "Mock Data" }
   ) {
     self.fetchDataHandler = fetchDataHandler
   }
-
-  public func fetchData() async -> String {
-    await fetchDataHandler()
+  
+  public func fetchData() async throws -> String {
+    try await fetchDataHandler()
   }
 }

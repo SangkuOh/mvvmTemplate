@@ -31,7 +31,7 @@ public struct RootView: View {
     exampleService: .init(
       repository: ExampleRepositoryMock(
         fetchDataHandler: {
-          "RootView"
+          throw NetworkError.invalidResponse
         }
       )
     )
