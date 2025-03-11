@@ -12,6 +12,10 @@ struct RootState {
   var data: String = ""
 }
 
+enum RootAction {
+  case loadExample
+}
+
 @Observable
 @MainActor
 public final class RootViewModel {
@@ -20,16 +24,22 @@ public final class RootViewModel {
   var exampleService: ExampleService
 
 
-  public init(exampleService: ExampleService = .init()) {
+  public init(exampleService: ExampleService) {
     self.exampleService = exampleService
   }
 
-  func loadExample() async {
-    do {
-      let result = try await exampleService.fetch()
-      state.data = result
-    } catch {
-      print(error.localizedDescription)
+  func send(_ action: RootAction) {
+    switch action {
+      case .loadExample:
+        Task {
+          do {
+            let result = try await exampleService.fetch()
+            state.data = result
+          } catch {
+            state.data = error.localizedDescription
+          }
+        }
     }
   }
 }
+
